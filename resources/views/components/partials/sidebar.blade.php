@@ -26,6 +26,13 @@
                 <span class="ml-2" x-show="isOpen">Dashboard</span>
             </a>
         </li>
+        <li>
+            <a wire:navigate href="{{ route('contacts.index') }}"
+                class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('contacts.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
+                <i class="fas fa-home"></i>
+                <span class="ml-2" x-show="isOpen">Contact</span>
+            </a>
+        </li>
         {{-- <li class="py-2 {{ request()->routeIs('blog.index') ? 'glass rounded-md' : '' }}">
             <a wire:navigate href="{{ route('blog.index') }}" class="flex items-center px-4 py-2 my-1 text-neutral">
                 <i class="far fa-newspaper"></i>

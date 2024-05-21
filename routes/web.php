@@ -3,6 +3,7 @@
 use App\Livewire\Roles\RolesIndex;
 use App\Livewire\Users\UsersIndex;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Contacts\ContactsIndex;
 use App\Livewire\Permissions\PermissionsIndex;
 
 /*
@@ -48,5 +49,7 @@ Route::middleware([
     Route::get('/permissions', PermissionsIndex::class)->name('permissions.index');
 
     Route::get('/roles', RolesIndex::class)->name('roles.index');
+
+    Route::get('/contacts', ContactsIndex::class)->name('contacts.index');
     
 });
