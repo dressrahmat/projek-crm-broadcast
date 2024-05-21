@@ -1,4 +1,8 @@
 <div>
+    <x-button class="btn-success btn-md text-lg" @click="$wire.set('modalCreate', true)">
+        Tambah Data
+        <i class="fas fa-plus-square"></i>
+    </x-button>
 
     <x-dialog-modal wire:model.live="modalCreate" submit="save">
         <x-slot name="title">
