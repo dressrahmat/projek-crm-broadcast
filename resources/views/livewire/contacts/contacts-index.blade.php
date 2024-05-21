@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="card-body">
-            @livewire('contact.contact-table')
+            @livewire('contacts.contacts-table')
         </div>
     </div>
     {{-- <div class="basis-2/5">

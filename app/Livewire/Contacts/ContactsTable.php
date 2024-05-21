@@ -15,6 +15,7 @@ class ContactsTable extends DataTableComponent
     {
         return [
             'export' => 'Export',
+            'sendBroadCast' => 'Kirim Pesan BroadCast',
         ];
     }
 
@@ -27,12 +28,63 @@ class ContactsTable extends DataTableComponent
     public function export()
     {
         $contact = $this->getSelected();
-    
+
         $this->clearSelected();
-    
+
         return Excel::download(new ContactExport($contact), 'users.xlsx');
     }
-    
+
+    public function sendBroadCast()
+    {
+        $id = $this->getSelected();
+
+        $this->clearSelected();
+
+        $contacts = Contact::whereIn('id', $id)->get();
+
+        $nomor_telepon = [];
+
+        foreach ($contacts as $key) {
+            $nomor_telepon[] = $key->nomor_telepon;
+        }
+
+        $contactsString = implode(',', $nomor_telepon);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => [
+                'target' => $contactsString,
+                'message' => 'test broadcast message',
+                'delay' => '2',
+                'countryCode' => '62', //optional
+            ],
+            CURLOPT_HTTPHEADER => [
+                'Authorization: k#Bvsm_xN_stST+wBC8W', //change TOKEN to your actual token
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        dd($response);
+
+        // Menggunakan return redirect untuk mengarahkan ke halaman lain setelah eksekusi
+        if ($response) {
+            $this->dispatch('sweet-alert', icon: 'success', title: 'Pesan broadcast berhasil dikirim.');
+        } else {
+            $this->dispatch('sweet-alert', icon: 'error', title: 'Gagal mengirim pesan broadcast.'.$th->getMessage());
+        }
+    }
 
     #[On('refreshDatatable')]
     public function columns(): array
