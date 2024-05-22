@@ -27,6 +27,13 @@
             </a>
         </li>
         <li>
+            <a wire:navigate href="{{ route('label.index') }}"
+                class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('label.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
+                <i class="fas fa-home"></i>
+                <span class="ml-2" x-show="isOpen">Label Kontak</span>
+            </a>
+        </li>
+        <li>
             <a wire:navigate href="{{ route('contacts.index') }}"
                 class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('contacts.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
                 <i class="fas fa-home"></i>

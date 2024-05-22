@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Contacts\ContactsIndex;
 use App\Livewire\Dashboards\DashboardsIndex;
 use App\Livewire\Permissions\PermissionsIndex;
+use App\Livewire\LabelKontaks\LabelKontaksIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,7 @@ Route::middleware([
     Route::get('/roles', RolesIndex::class)->name('roles.index');
 
     Route::get('/contacts', ContactsIndex::class)->name('contacts.index');
+
+    Route::get('/label-kontaks', LabelKontaksIndex::class)->name('label.index');
     
 });
