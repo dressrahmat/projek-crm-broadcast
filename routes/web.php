@@ -4,6 +4,7 @@ use App\Livewire\Roles\RolesIndex;
 use App\Livewire\Users\UsersIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Contacts\ContactsIndex;
+use App\Livewire\Dashboards\DashboardsIndex;
 use App\Livewire\Permissions\PermissionsIndex;
 
 /*
@@ -26,10 +27,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
+    Route::get('/dashboard', DashboardsIndex::class)->name('dashboard');
     Route::get('/user', UsersIndex::class)->name('users.index');
 
 });

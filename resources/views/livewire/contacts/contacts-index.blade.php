@@ -1,4 +1,4 @@
-<div class="flex flex-col lg:flex-row gap-4">
+<div class="flex flex-col-reverse xl:flex-row gap-4">
     <div class="basis-1/2 card bg-slate-100 shadow-xl">
         <div class="flex justify-between items-center bg-slate-600 p-3 overflow-hidden">
             <div>
@@ -20,7 +20,7 @@
             </div>
             <label class="form-control p-5">
                 <textarea wire:model.live="pesan" placeholder="Silahkan Masukkan Pesan" wire:keyup="refreshSearch"
-                    class="textarea textarea-bordered rounded-lg bg-gray-100 text-gray-500 textarea-primary h-96 @error('pesan') border-red-500 @enderror"></textarea>
+                    class="textarea textarea-bordered rounded-lg bg-gray-100 text-gray-500 textarea-primary xl:h-96 @error('pesan') border-red-500 @enderror"></textarea>
                 @error('pesan')
                     <span class="error text-red-500">{{ $message }}</span>
                 @enderror
