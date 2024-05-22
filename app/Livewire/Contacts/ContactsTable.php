@@ -3,16 +3,18 @@
 namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
+use App\Models\LabelKontak;
 use Livewire\Attributes\On;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class ContactsTable extends DataTableComponent
 {
     public string $tableName = 'contact';
     public array $contact = [];
-    
+
     public $pesan = 'pesan default';
     public function bulkActions(): array
     {
@@ -83,32 +85,46 @@ class ContactsTable extends DataTableComponent
 
         curl_close($curl);
 
-
         // Menggunakan return redirect untuk mengarahkan ke halaman lain setelah eksekusi
         if ($response) {
             $this->dispatch('sweet-alert', icon: 'success', title: 'Pesan broadcast berhasil dikirim.');
         } else {
-            $this->dispatch('sweet-alert', icon: 'error', title: 'Gagal mengirim pesan broadcast.'.$th->getMessage());
+            $this->dispatch('sweet-alert', icon: 'error', title: 'Gagal mengirim pesan broadcast.' . $th->getMessage());
         }
+    }
+
+    public function filters(): array
+    {
+        $nama_labels = LabelKontak::pluck('nama_label', 'id')->toArray();
+
+        return [
+            SelectFilter::make('Projek', 'id_label')
+                ->options(['' => 'Semua'] + $nama_labels)
+                ->filter(function ($query, $value) {
+                    $query->where('id_label', $value);
+                }),
+            // DateFilter::make('Projek Dibuat')
+            //     ->config([
+            //         'min' => '2020-01-01',
+            //         'max' => '2025-12-31',
+            //     ])
+            //     ->filter(function (Builder $builder, string $value) {
+            //         $builder->where('barang_keluar.created_at', '>=', $value);
+            //     }),
+            // DateFilter::make('Sampai Dengan')->filter(function (Builder $builder, string $value) {
+            //     $builder->where('barang_keluar.created_at', '<=', $value);
+            // }),
+        ];
     }
 
     #[On('refreshDatatable')]
     public function columns(): array
     {
-        return [
-            // Column::make('Id', 'id')->searchable()->sortable(),
-            Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(),
-            Column::make('Email', 'email')->searchable()->sortable(),
-            Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(),
-            // Column::make('Organisasi', 'organisasi')->searchable()->sortable(),
-            Column::make('Aksi')
-                ->label(fn($row, Column $column) => view('components.partials.datatable.aksi')->withRow($row)),
-        ];
+        return [Column::make('Id', 'id')->searchable()->sortable(), Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(), Column::make('Email', 'email')->searchable()->sortable(), Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(), Column::make('Aksi')->label(fn($row, Column $column) => view('components.partials.datatable.aksi')->withRow($row))];
     }
 
     public function builder(): Builder
     {
-        return Contact::query()
-            ->where('id_user', auth()->user()->id);
+        return Contact::query()->where('id_user', auth()->user()->id);
     }
 }

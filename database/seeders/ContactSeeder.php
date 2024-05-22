@@ -18,17 +18,23 @@ class ContactSeeder extends Seeder
         try {
             Contact::factory()->count(10)->create([
                 'id_user' => 1,
-                'id_label' => rand(1, 3)
+                'id_label' => function () {
+        return rand(1, 3);
+    }
             ]);
 
             Contact::factory()->count(15)->create([
                 'id_user' => 2,
-                'id_label' => rand(1, 3)
+                'id_label' => function () {
+        return rand(1, 3);
+    }
             ]);
 
             Contact::factory()->count(6)->create([
                 'id_user' => 3,
-                'id_label' => rand(1, 3)
+                'id_label' => function () {
+        return rand(1, 3);
+    }
             ]);
 
             DB::commit();
