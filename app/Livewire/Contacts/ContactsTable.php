@@ -10,7 +10,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 class ContactsTable extends DataTableComponent
 {
     protected $model = Contact::class;
-
+    public $pesan = 'pesan default';
     public function bulkActions(): array
     {
         return [
@@ -33,7 +33,11 @@ class ContactsTable extends DataTableComponent
 
         return Excel::download(new ContactExport($contact), 'users.xlsx');
     }
-
+    #[On('adaPesan')]
+    public function tangkapPesan($pesan)
+    {
+        return $this->pesan = $pesan;
+    }
     public function sendBroadCast()
     {
         $id = $this->getSelected();
@@ -63,7 +67,7 @@ class ContactsTable extends DataTableComponent
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => [
                 'target' => $contactsString,
-                'message' => 'test broadcast message',
+                'message' => $this->pesan,
                 'delay' => '2',
                 'countryCode' => '62', //optional
             ],
@@ -94,7 +98,7 @@ class ContactsTable extends DataTableComponent
             Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(),
             Column::make('Email', 'email')->searchable()->sortable(),
             Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(),
-            Column::make('Organisasi', 'organisasi')->searchable()->sortable(),
+            // Column::make('Organisasi', 'organisasi')->searchable()->sortable(),
             Column::make('Aksi')
                 // Note: The view() method is reserved for columns that have a field
                 ->label(fn($row, Column $column) => view('components.partials.button-datatable.edit-button')->withRow($row)),
