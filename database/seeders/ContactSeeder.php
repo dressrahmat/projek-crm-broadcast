@@ -13,6 +13,16 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        Contact::factory()->count(50)->create();
+        Contact::factory()->count(10)->create([
+            'id_user' => 1
+        ]);
+
+        Contact::factory()->count(15)->create([
+            'id_user' => 2
+        ]);
+
+        Contact::factory()->count(6)->create([
+            'id_user' => 3
+        ]);
     }
 }
