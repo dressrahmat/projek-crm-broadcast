@@ -3,6 +3,7 @@
 namespace App\Livewire\Contacts;
 
 use Livewire\Component;
+use App\Models\LabelKontak;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Forms\ContactForm;
@@ -39,6 +40,7 @@ class ContactsCreate extends Component
     }
     public function render()
     {
-        return view('livewire.contacts.contacts-create');
+        $labelkontaks = LabelKontak::get();
+        return view('livewire.contacts.contacts-create', compact('labelkontaks'));
     }
 }

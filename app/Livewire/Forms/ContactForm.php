@@ -28,6 +28,9 @@ class ContactForm extends Form
     #[Rule('required|min:3', as: 'Alamat')]
     public $alamat;
 
+    #[Rule('required', as: 'Label Kontak')]
+    public $id_label;
+
 
     public function setForm(Contact $contact)
     {
@@ -38,6 +41,7 @@ class ContactForm extends Form
         $this->nomor_telepon = $contact->nomor_telepon;
         $this->organisasi = $contact->organisasi;
         $this->alamat = $contact->alamat;
+        $this->id_label = $contact->labelkontak->id_label;
     }
 
     public function store()

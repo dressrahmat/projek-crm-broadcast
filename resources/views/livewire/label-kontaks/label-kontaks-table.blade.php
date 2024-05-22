@@ -15,6 +15,7 @@
                 <tr>
                     <th>No</th>
                     <th>Label Kontak</th>
+                    <th>Jumlah Kontak</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <tr>
                         <td>{{ $data->firstItem() + $loop->index }}</td>
                         <td>{{ $label->nama_label }}</td>
+                        <td>{{ $label->kontak->count() }}</td>
                         <td>
                             <!-- Dropdown -->
                             <div class="dropdown">

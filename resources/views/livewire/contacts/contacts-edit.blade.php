@@ -48,6 +48,24 @@
                     <x-input-error for="form.alamat" class="mt-1" />
                 </div>
 
+                <!-- Pilih Label Kontak -->
+                <div class="col-span-12 mb-4">
+                    <x-label for="form.id_label" value="pilih" />
+                    <x-select id="form.id_label" type="text" class="mt-1 w-full" wire:model="form.id_label" require
+                        autocomplete="form.id_label">
+                        @if ($id_label)
+                            <option selected disabled value="{{ $id_label }}">{{ $id_label }}</option>
+                        @endif
+                        <option>Pilih Kontak</option>
+                        @foreach ($labelkontaks as $labelkontak)
+                            <option value="{{ $labelkontak->id }}">
+                                {{ $labelkontak->nama_label }}
+                            </option>
+                        @endforeach
+                    </x-select>
+                    <x-input-error for="form.id_label" class="mt-1" />
+                </div>
+
             </div>
         </x-slot>
 

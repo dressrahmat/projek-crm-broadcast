@@ -37,7 +37,7 @@
             <a wire:navigate href="{{ route('contacts.index') }}"
                 class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('contacts.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
                 <i class="fas fa-home"></i>
-                <span class="ml-2" x-show="isOpen">Contact</span>
+                <span class="ml-2" x-show="isOpen">Kontak</span>
             </a>
         </li>
         {{-- <li class="py-2 {{ request()->routeIs('blog.index') ? 'glass rounded-md' : '' }}">
