@@ -10,6 +10,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 class ContactsTable extends DataTableComponent
 {
     protected $model = Contact::class;
+    
     public $pesan = 'pesan default';
     public function bulkActions(): array
     {
@@ -33,6 +34,7 @@ class ContactsTable extends DataTableComponent
 
         return Excel::download(new ContactExport($contact), 'users.xlsx');
     }
+
     #[On('adaPesan')]
     public function tangkapPesan($pesan)
     {
@@ -97,19 +99,8 @@ class ContactsTable extends DataTableComponent
             Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(),
             Column::make('Email', 'email')->searchable()->sortable(),
             Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(),
-            // Column::make('Organisasi', 'organisasi')->searchable()->sortable(),
             Column::make('Aksi')
-                // Note: The view() method is reserved for columns that have a field
                 ->label(fn($row, Column $column) => view('components.partials.button-datatable.edit-button')->withRow($row)),
-            // Column::make('Hapus')
-            //     // Note: The view() method is reserved for columns that have a field
-            //     ->label(fn($row, Column $column) => view('components.partials.button-datatable.hapus-button')->withRow($row)),
-            // Column::make("Alamat", "alamat")
-            //     ->sortable(),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 }
