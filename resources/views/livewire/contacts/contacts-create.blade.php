@@ -1,6 +1,6 @@
 <div>
-    <x-button class="btn-success btn-md text-lg" @click="$wire.set('modalCreate', true)">
-        Tambah Data
+    <x-button class="btn-success btn-md text-lg flex justify-center items-center" @click="$wire.set('modalCreate', true)">
+        <span>Tambah Data</span>
         <i class="fas fa-plus-square"></i>
     </x-button>
 

@@ -8,12 +8,20 @@
         <x-slot name="content">
             <div class="grid grid-cols-12 gap-4">
 
-                <!-- Name -->
+                <!-- Nama Lengkap -->
                 <div class="col-span-12 mb-4">
-                    <x-label for="form.nama_lengkap" value="Name" />
+                    <x-label for="form.nama_lengkap" value="Nama Lengkap" />
                     <x-input id="form.nama_lengkap" type="text" class="mt-1 w-full" wire:model="form.nama_lengkap"
                         require autocomplete="form.nama_lengkap" />
                     <x-input-error for="form.nama_lengkap" class="mt-1" />
+                </div>
+
+                <!-- Nomor Telepon -->
+                <div class="col-span-12 mb-4">
+                    <x-label for="form.nomor_telepon" value="Nomor Telepon" />
+                    <x-input id="form.nomor_telepon" type="text" class="mt-1 w-full" wire:model="form.nomor_telepon"
+                        require autocomplete="form.nomor_telepon" />
+                    <x-input-error for="form.nomor_telepon" class="mt-1" />
                 </div>
 
                 <!-- Email -->
@@ -24,39 +32,21 @@
                     <x-input-error for="form.email" class="mt-1" />
                 </div>
 
-                <!-- Address -->
+                <!-- Organisasi -->
                 <div class="col-span-12 mb-4">
-                    <x-label for="form.alamat" value="Alamat" />
-                    <x-input id="form.alamat" type="text" class="mt-1 w-full" wire:model="form.alamat" require
-                        autocomplete="form.alamat" />
-                    <x-input-error for="form.alamat" class="mt-1" />
+                    <x-label for="form.organisasi" value="Organisasi" />
+                    <x-input id="form.organisasi" type="text" class="mt-1 w-full" wire:model="form.organisasi"
+                        require autocomplete="form.organisasi" />
+                    <x-input-error for="form.organisasi" class="mt-1" />
                 </div>
 
-                <!-- Hobbies -->
-                {{-- <div class="col-span-12 mb-4">
-                    <x-label for="form.hobbies" value="Hobbies" />
-                    <x-tom 
-                        x-init="$el.hobbies = new Tom($el, {
-                            sortField: {
-                                field: 'hobbies',
-                                direction: 'asc',
-                            },
-                            valueField: 'hobbies',
-                            labelField: 'hobbies',
-                            searchField: 'hobbies',
-                        });"
-                        @set-hobbies-edit.window="
-                            $el.hobbies.addOptions(event.detail.data)
-                            $el.hobbies.addItems(event.detail.data)
-                        "
-                    id="form.hobbies" type="text" class="mt-1 w-full" multiple wire:model="form.hobbies">
-                        <option></option>
-                        @foreach (\App\Helpers\HobbiesHelper::list() as $hobby)
-                        <option>{{ $hobby }}</option>
-                        @endforeach
-                    </x-tom>
-                    <x-input-error for="form.hobbies" class="mt-1" />
-                </div> --}}
+                <!-- Alamat -->
+                <div class="col-span-12 mb-4">
+                    <x-label for="form.alamat" value="Alamat" />
+                    <textarea wire:model="form.alamat" placeholder="Silahkan Masukkan Pesan"
+                        class="textarea textarea-bordered w-full bg-white textarea-primary @error('form.alamat') border-red-500 @enderror"></textarea>
+                    <x-input-error for="form.alamat" class="mt-1" />
+                </div>
 
             </div>
         </x-slot>

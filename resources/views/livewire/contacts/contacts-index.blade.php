@@ -27,5 +27,11 @@
             </label>
         </div>
     </div>
-
+    <div>
+        @livewire('contacts.contacts-edit')
+    </div>
+    <x-sweet-alert />
+    <div>
+        <x-confirm-delete />
+    </div>
 </div>

@@ -80,7 +80,6 @@ class ContactsTable extends DataTableComponent
 
         curl_close($curl);
 
-        dd($response);
 
         // Menggunakan return redirect untuk mengarahkan ke halaman lain setelah eksekusi
         if ($response) {
