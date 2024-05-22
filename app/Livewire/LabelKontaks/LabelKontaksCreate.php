@@ -4,12 +4,12 @@ namespace App\Livewire\LabelKontaks;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use App\Livewire\Forms\PermissionForm;
-use App\Livewire\Permissions\PermissionsTable;
+use App\Livewire\Forms\LabelKontakForm;
+use App\Livewire\LabelKontaks\LabelKontaksTable;
 
 class LabelKontaksCreate extends Component
 {
-    public PermissionForm $form;
+    public LabelKontakForm $form;
 
     public function save()
     {
@@ -26,7 +26,7 @@ class LabelKontaksCreate extends Component
             DB::rollback();
         }
 
-        $this->dispatch('form-create')->to(PermissionsTable::class);
+        $this->dispatch('form-create')->to(LabelKontaksTable::class);
     }
 
     public function render()

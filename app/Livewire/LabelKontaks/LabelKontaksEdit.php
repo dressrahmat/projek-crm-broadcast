@@ -4,22 +4,22 @@ namespace App\Livewire\LabelKontaks;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
-use App\Livewire\Forms\PermissionForm;
-use Spatie\Permission\Models\Permission;
-use App\Livewire\Permissions\PermissionsTable;
+use App\Livewire\Forms\LabelKontakForm;
+use App\Models\LabelKontak;
+use App\Livewire\LabelKontaks\LabelKontaksTable;
 
 class LabelKontaksEdit extends Component
 {
-    public PermissionForm $form;
+    public LabelKontakForm $form;
 
-    public $modalPermissionEdit = false;
+    public $modalEdit = false;
 
     #[On('form-edit')]
-    public function set_form(Permission $id)
+    public function set_form(LabelKontak $id)
     {
         $this->form->setForm($id);
 
-        $this->modalPermissionEdit = true;
+        $this->modalEdit = true;
     }
 
     public function edit()
@@ -34,7 +34,7 @@ class LabelKontaksEdit extends Component
             $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal diupdate'.$th->getMessage());
         }
 
-        $this->dispatch('form-edit')->to(PermissionsTable::class);
+        $this->dispatch('form-edit')->to(LabelKontaksTable::class);
     }
     public function render()
     {

@@ -5,7 +5,7 @@ namespace App\Livewire\LabelKontaks;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Permission;
+use App\Models\LabelKontak;
 
 class LabelKontaksTable extends Component
 {
@@ -14,7 +14,7 @@ class LabelKontaksTable extends Component
     public function confirmDelete($get_id)
     {
         try {
-            Permission::destroy($get_id);
+            LabelKontak::destroy($get_id);
         } catch (\Throwable $th) {
             $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal di hapus');
         }
@@ -25,7 +25,7 @@ class LabelKontaksTable extends Component
     #[On('form-delete')]
     public function render()
     {
-        $data = Permission::latest()->paginate(5);
+        $data = LabelKontak::latest()->paginate(5);
         return view('livewire.label-kontaks.label-kontaks-table', compact('data'));
     }
 }

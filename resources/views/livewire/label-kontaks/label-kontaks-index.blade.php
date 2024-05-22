@@ -1,10 +1,10 @@
 <div class="flex flex-col lg:flex-row gap-4">
     <div class="basis-1/2">
-        @livewire('permissions.permissions-table')
+        @livewire('label-kontaks.label-kontaks-table')
     </div>
     <div class="basis-2/5">
-        @livewire('permissions.permissions-create')
-        @livewire('permissions.permissions-edit')
+        @livewire('label-kontaks.label-kontaks-create')
+        @livewire('label-kontaks.label-kontaks-edit')
     </div>
 
 </div>
