@@ -4,12 +4,14 @@ namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
 use Livewire\Attributes\On;
+use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 
 class ContactsTable extends DataTableComponent
 {
-    protected $model = Contact::class;
+    public string $tableName = 'contact';
+    public array $contact = [];
     
     public $pesan = 'pesan default';
     public function bulkActions(): array
@@ -40,6 +42,7 @@ class ContactsTable extends DataTableComponent
     {
         return $this->pesan = $pesan;
     }
+    
     public function sendBroadCast()
     {
         $id = $this->getSelected();
@@ -89,6 +92,12 @@ class ContactsTable extends DataTableComponent
         } else {
             $this->dispatch('sweet-alert', icon: 'error', title: 'Gagal mengirim pesan broadcast.'.$th->getMessage());
         }
+    }
+
+    public function builder(): Builder
+    {
+        return Contact::query()
+            ->where('id_user', auth()->user()->id);
     }
 
     #[On('refreshDatatable')]
