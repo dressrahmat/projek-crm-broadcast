@@ -6,11 +6,18 @@ use App\Models\Contact;
 use Livewire\Component;
 use App\Models\LabelKontak;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
+use App\Imports\ContactsImport;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Livewire\Contacts\ContactsTable;
 
 class ContactsIndex extends Component
 {
+    use WithFileUploads;
+
     public $pesan;
+    public $file;
     public $data_kontak;
     public $ubah_label = false;
     public function refreshSearch()
@@ -41,6 +48,25 @@ class ContactsIndex extends Component
         } catch (\Throwable $th) {
             $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal di hapus');
         }
+    }
+
+    public function import()
+    {
+        $userId = auth()->user()->id;
+        DB::beginTransaction();
+        try {
+            Excel::import(new ContactsImport($userId), $this->file->getRealPath());
+            
+            // Jika berhasil, kembalikan ke halaman sebelumnya dengan pesan sukses
+            $this->dispatch('sweet-alert', icon: 'success', title: 'data berhasil disimpan');
+            DB::commit();
+        } catch (\Exception $e) {
+
+            // Jika terjadi kesalahan, kembalikan ke halaman sebelumnya dengan pesan error
+            $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal disimpan'.$e->getMessage());
+            DB::rollback();
+        }
+        $this->dispatch('refreshDatatable')->to(ContactsTable::class);
     }
 
     public function render()
