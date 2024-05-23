@@ -26,6 +26,6 @@ class Contact extends Model
      */
     public function labelkontak(): BelongsTo
     {
-        return $this->belongsTo(labelkontak::class, 'id_label', 'id');
+        return $this->belongsTo(LabelKontak::class, 'id_label', 'id');
     }
 }
