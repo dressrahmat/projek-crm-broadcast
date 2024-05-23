@@ -9,6 +9,11 @@
             </div>
         </div>
         <div class="card-body">
+            <div>
+                @if ($ubah_label)
+                    @include('components.partials.datatable.ubah-label')
+                @endif
+            </div>
             @livewire('contacts.contacts-table')
         </div>
     </div>

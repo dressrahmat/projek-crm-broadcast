@@ -5,6 +5,7 @@ namespace App\Livewire\Contacts;
 use App\Models\Contact;
 use App\Models\LabelKontak;
 use Livewire\Attributes\On;
+use App\Livewire\Contacts\ContactsIndex;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -21,6 +22,7 @@ class ContactsTable extends DataTableComponent
         return [
             'export' => 'Export',
             'sendBroadCast' => 'Kirim Pesan BroadCast',
+            'ubahLabel' => 'Tandai Kontak',
         ];
     }
 
@@ -43,6 +45,12 @@ class ContactsTable extends DataTableComponent
     {
         return $this->pesan = $pesan;
     }
+
+    public function ubahLabel()
+    {
+        $this->dispatch('ubahLabel', pesan: $this->getSelected())->to(ContactsIndex::class);
+    }
+
     public function sendBroadCast()
     {
         $id = $this->getSelected();
