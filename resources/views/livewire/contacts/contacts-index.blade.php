@@ -9,10 +9,20 @@
             </div>
         </div>
         <div class="card-body">
-            <div>
-                @if ($ubah_label)
-                    @include('components.partials.datatable.ubah-label')
-                @endif
+            <div class="flex justify-between">
+                <div>
+                    @if ($ubah_label)
+                        @include('components.partials.datatable.ubah-label')
+                    @endif
+                </div>
+                <div>
+                    <form action="{{ route('contacts.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="form-control">
+                        <br>
+                        <button class="btn btn-success">Import User Data</button>
+                    </form>
+                </div>
             </div>
             @livewire('contacts.contacts-table')
         </div>

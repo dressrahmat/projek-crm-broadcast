@@ -7,6 +7,7 @@ use App\Livewire\Contacts\ContactsIndex;
 use App\Livewire\Dashboards\DashboardsIndex;
 use App\Livewire\Permissions\PermissionsIndex;
 use App\Livewire\LabelKontaks\LabelKontaksIndex;
+use App\Http\Controllers\Dashboard\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,8 @@ Route::middleware([
     Route::get('/roles', RolesIndex::class)->name('roles.index');
 
     Route::get('/contacts', ContactsIndex::class)->name('contacts.index');
+
+    Route::post('/contacts-import', [ImportController::class, 'importContact'])->name('contacts.import');
 
     Route::get('/label-kontaks', LabelKontaksIndex::class)->name('label.index');
     

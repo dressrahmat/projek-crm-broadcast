@@ -5,10 +5,13 @@ namespace App\Livewire\Contacts;
 use App\Models\Contact;
 use App\Models\LabelKontak;
 use Livewire\Attributes\On;
+use App\Exports\ContactsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Livewire\Contacts\ContactsIndex;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class ContactsTable extends DataTableComponent
@@ -38,7 +41,7 @@ class ContactsTable extends DataTableComponent
 
         $this->clearSelected();
 
-        return Excel::download(new ContactExport($contact), 'users.xlsx');
+        return Excel::download(new ContactsExport($contact), 'contacts.xlsx');
     }
     #[On('adaPesan')]
     public function tangkapPesan($pesan)
