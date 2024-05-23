@@ -22,7 +22,7 @@ class ContactsTable extends DataTableComponent
         return [
             'export' => 'Export',
             'sendBroadCast' => 'Kirim Pesan BroadCast',
-            'ubahLabel' => 'Tandai Kontak',
+            'ubahLabel' => 'Ubah Label',
         ];
     }
 
