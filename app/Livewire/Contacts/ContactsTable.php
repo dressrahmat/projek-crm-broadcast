@@ -120,7 +120,12 @@ class ContactsTable extends DataTableComponent
     #[On('refreshDatatable')]
     public function columns(): array
     {
-        return [Column::make('Id', 'id')->searchable()->sortable(), Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(), Column::make('Email', 'email')->searchable()->sortable(), Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(), Column::make('Aksi')->label(fn($row, Column $column) => view('components.partials.datatable.aksi')->withRow($row))];
+        return [
+            Column::make('Id', 'id')->searchable()->sortable(), 
+            Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(), 
+            Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(), 
+            Column::make('Label', 'labelkontak.nama_label')->searchable()->sortable(), 
+            Column::make('Aksi')->label(fn($row, Column $column) => view('components.partials.datatable.aksi')->withRow($row))];
     }
 
     public function builder(): Builder
