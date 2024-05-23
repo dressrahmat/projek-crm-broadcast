@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
             <div class="flex justify-between">
-                <div>
+                <div class="grid grid-cols-2 h-fit gap-2">
                     @if ($ubah_label)
                         @include('components.partials.datatable.ubah-label')
                     @endif
