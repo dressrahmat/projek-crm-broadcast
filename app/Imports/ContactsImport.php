@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Contact;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class ContactsImport implements ToModel, WithHeadingRow
+class ContactsImport implements ToModel, WithHeadingRow, WithValidation
 {
     private $userId;
 
@@ -31,14 +32,35 @@ class ContactsImport implements ToModel, WithHeadingRow
         ]);
     }
 
-    // public function rules(): array
-    // {
-    //     return [
-    //         'nama_lengkap' => 'required',
-    //         'nomor_telepon' => 'required',
-    //         'organisasi' => 'nullable',
-    //         'alamat' => 'nullable',
-    //         'email' => 'nullable',
-    //     ];
-    // }
+    /**
+     * Rules for validation
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            '*.nama_lengkap'  => 'required|string|max:255',
+            '*.nomor_telepon' => 'required|max:15',
+            '*.organisasi'    => 'nullable|string|max:255',
+            '*.alamat'        => 'nullable|string|max:255',
+            '*.email'         => 'nullable|email|unique:contact,email',
+        ];
+    }
+
+    /**
+     * Custom validation messages
+     *
+     * @return array
+     */
+    public function customValidationMessages()
+    {
+        return [
+            'nama_lengkap.required'  => 'Nama lengkap harus diisi.',
+            'nomor_telepon.required' => 'Nomor telepon harus diisi.',
+            'email.required'         => 'Email harus diisi.',
+            'email.email'            => 'Format email tidak valid.',
+            'email.unique'           => 'Email sudah terdaftar.',
+        ];
+    }
 }

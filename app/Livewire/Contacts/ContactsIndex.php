@@ -52,18 +52,31 @@ class ContactsIndex extends Component
 
     public function import()
     {
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx,csv',
+        ]);
         $userId = auth()->user()->id;
         DB::beginTransaction();
         try {
+            
             Excel::import(new ContactsImport($userId), $this->file->getRealPath());
             
             // Jika berhasil, kembalikan ke halaman sebelumnya dengan pesan sukses
             $this->dispatch('sweet-alert', icon: 'success', title: 'data berhasil disimpan');
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
 
+            $failures = $e->failures();
+            $messages = [];
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $messages = $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+            }
+            // dd($messages);
             // Jika terjadi kesalahan, kembalikan ke halaman sebelumnya dengan pesan error
-            $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal disimpan'.$e->getMessage());
+            $this->dispatch('modal-sweet-alert', icon: 'error', title: 'data gagal disimpan', text:$messages);
             DB::rollback();
         }
         $this->dispatch('refreshDatatable')->to(ContactsTable::class);

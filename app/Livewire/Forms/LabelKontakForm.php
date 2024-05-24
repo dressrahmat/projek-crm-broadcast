@@ -3,9 +3,12 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Form;
+use App\Models\Contact;
 use App\Models\LabelKontak;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
+use App\Livewire\Contacts\ContactsTable;
+use App\Livewire\LabelKontaks\KontaksNonLabelTable;
 
 class LabelKontakForm extends Form
 {
@@ -15,6 +18,10 @@ class LabelKontakForm extends Form
 
     #[Rule('required|min:3', as: 'Name')]
     public $nama_label;
+
+    
+    #[Rule('required|array', as: 'Kontak')]
+    public $kontaks = [];
 
 
     public function setForm(LabelKontak $label_kontak)
@@ -26,7 +33,10 @@ class LabelKontakForm extends Form
 
     public function store()
     {
-        LabelKontak::create($this->except('label_kontak'));
+        $simpan = LabelKontak::create($this->except('label_kontak'));
+        if ($this->kontaks) {
+            Contact::whereIn('id', $this->kontaks)->update(['id_label' => $simpan->id]);
+        }
         $this->reset();
     }
 

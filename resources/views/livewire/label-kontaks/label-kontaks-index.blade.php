@@ -6,5 +6,6 @@
         @livewire('label-kontaks.label-kontaks-create')
         @livewire('label-kontaks.label-kontaks-edit')
     </div>
-
+    <x-sweet-alert />
+    <x-modal-sweet-alert />
 </div>

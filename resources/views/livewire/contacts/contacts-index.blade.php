@@ -16,28 +16,20 @@
                     @endif
                 </div>
                 <div>
-                    {{-- <form action="{{ route('contacts.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="form-control">
-                        <br>
-                        <button class="btn btn-success">Import User Data</button>
-                    </form> --}}
                     <div>
                         <form wire:submit.prevent="import" enctype="multipart/form-data"
                             class="flex flex-col gap-1 items-end">
                             <input wire:model="file" type="file"
                                 class="file-input file-input-bordered file-input-xs w-full max-w-xs" />
                             @error('file')
-                                <span class="error">{{ $message }}</span>
+                                <span class="error text-red-500">{{ $message }}</span>
                             @enderror
 
                             <!-- Tidak perlu menambahkan tombol submit secara eksplisit -->
                             <button type="submit" class="btn btn-success btn-sm text-white">Import</button>
                         </form>
                     </div>
-                    @error('file')
-                        <span class="error text-red-500">{{ $message }}</span>
-                    @enderror
+
                 </div>
             </div>
             @livewire('contacts.contacts-table')
@@ -62,6 +54,7 @@
         @livewire('contacts.contacts-edit')
     </div>
     <x-sweet-alert />
+    <x-modal-sweet-alert />
     <div>
         <x-confirm-delete />
     </div>

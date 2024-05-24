@@ -31,7 +31,6 @@ class ContactForm extends Form
     #[Rule('required', as: 'Label Kontak')]
     public $id_label;
 
-
     public function setForm(Contact $contact)
     {
         $this->contact = $contact;
