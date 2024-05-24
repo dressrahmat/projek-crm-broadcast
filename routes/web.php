@@ -3,6 +3,7 @@
 use App\Livewire\Roles\RolesIndex;
 use App\Livewire\Users\UsersIndex;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Devices\DevicesIndex;
 use App\Livewire\Contacts\ContactsIndex;
 use App\Livewire\Dashboards\DashboardsIndex;
 use App\Livewire\Permissions\PermissionsIndex;
@@ -56,5 +57,7 @@ Route::middleware([
     Route::post('/contacts-import', [ImportController::class, 'importContact'])->name('contacts.import');
 
     Route::get('/label-kontaks', LabelKontaksIndex::class)->name('label.index');
+
+    Route::get('/devices', DevicesIndex::class)->name('devices.index');
     
 });
