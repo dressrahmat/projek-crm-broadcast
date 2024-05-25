@@ -63,6 +63,7 @@ class DevicesTable extends Component
                 CURLOPT_POSTFIELDS => [
                     'type' => $this->code,
                     'whatsapp' => $device,
+                    'countryCode' => '62', //optional
                 ],
                 CURLOPT_HTTPHEADER => ['Authorization: ' . $token],
             ]);
