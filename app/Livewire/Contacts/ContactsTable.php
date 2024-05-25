@@ -70,6 +70,39 @@ class ContactsTable extends DataTableComponent
 
         $contactsString = implode(',', $nomor_telepon);
 
+        // Mengambil data dari API Fonnte
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://api.fonnte.com/get-devices',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => ['Authorization: pi3Vo9@Ga!g2i7iR699dMBgP6J8x!xL-moU'],
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $data = json_decode($response, true);
+
+        // Menggunakan Laravel Collection untuk memfilter data
+        $datas = collect($data['data'])->filter(function($device) {
+            return $device['status'] == 'connect';
+        })->all();
+
+        $device = [];
+        foreach ($datas as $data) {
+            foreach ($data as $key => $value) {
+                $device[$key] = $value;
+            }
+        }
+
+
         $curl = curl_init();
 
         curl_setopt_array($curl, [
@@ -88,19 +121,19 @@ class ContactsTable extends DataTableComponent
                 'countryCode' => '62', //optional
             ],
             CURLOPT_HTTPHEADER => [
-                'Authorization: k#Bvsm_xN_stST+wBC8W', //change TOKEN to your actual token
+                'Authorization: '. $device['token'], //change TOKEN to your actual token
             ],
         ]);
 
         $response = curl_exec($curl);
 
         curl_close($curl);
+        $responseData = json_decode($response, true);
 
-        // Menggunakan return redirect untuk mengarahkan ke halaman lain setelah eksekusi
-        if ($response) {
-            $this->dispatch('sweet-alert', icon: 'success', title: 'Pesan broadcast berhasil dikirim.');
+        if ($responseData['status'] === false) {
+            $this->dispatch('sweet-alert', icon: 'error', title: $responseData['reason']);
         } else {
-            $this->dispatch('sweet-alert', icon: 'error', title: 'Gagal mengirim pesan broadcast.' . $th->getMessage());
+            $this->dispatch('sweet-alert', icon: 'success', title: $responseData['detail']);
         }
     }
 
