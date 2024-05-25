@@ -15,6 +15,7 @@ class DevicesTable extends Component
     public $consent;
     public $status;
     public $url;
+    public $modalDelete = false;
 
     public function confirmDelete($id, $token)
     {
@@ -38,8 +39,6 @@ class DevicesTable extends Component
             $response = curl_exec($curl);
 
             curl_close($curl);
-            // echo $response;
-            dd($response);
         } catch (\Throwable $th) {
             $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal di hapus');
         }
@@ -137,6 +136,7 @@ class DevicesTable extends Component
     #[On('form-create')]
     #[On('form-edit')]
     #[On('form-delete')]
+    #[On('delete-success')]
     public function render()
     {
         $curl = curl_init();

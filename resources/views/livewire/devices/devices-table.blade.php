@@ -48,9 +48,11 @@
                                 @endif
                                 <button class="btn btn-neutral text-white">Token</button>
                                 <button class="btn btn-accent text-white">Edit </button>
-                                <button
-                                    @click="$dispatch('confirm-delete', { id: '{{ $id }}', token: '{{ $device['token'] }}' })"
-                                    class="btn btn-secondary text-white">Hapus</button>
+                                <button class="btn btn-secondary text-white"
+                                    @click="$dispatch('modal-delete-device', { token: '{{ $device['token'] }}' })"
+                                    type="button">
+                                    Hapus
+                                </button>
                             </td>
                             {{-- <td>{{ $device['name'] }}</td>
                             <td>{{ $device['package'] }}</td>
@@ -110,4 +112,5 @@
     <div>
         <x-device-confirm-delete />
     </div>
+    @livewire('devices.devices-send-otp')
 </div>
