@@ -13,7 +13,6 @@ class ContactForm extends Form
 
     public $id;
 
-    #[Rule('required|min:3', as: 'Name')]
     public $id_user;
 
     #[Rule('required|min:3', as: 'Name')]
