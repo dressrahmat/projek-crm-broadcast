@@ -12,14 +12,14 @@ class DevicesEdit extends Component
 {
     public PermissionForm $form;
 
-    public $modalPermissionEdit = false;
+    public $modalEdit = false;
 
     #[On('form-edit')]
     public function set_form(Permission $id)
     {
         $this->form->setForm($id);
 
-        $this->modalPermissionEdit = true;
+        $this->modalEdit = true;
     }
 
     public function edit()

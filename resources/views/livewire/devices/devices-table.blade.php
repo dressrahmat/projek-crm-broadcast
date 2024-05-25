@@ -56,7 +56,11 @@
                                 }">
                                     <button class="btn btn-neutral text-white" @click="copyToClipboard()">Token</button>
                                 </div>
-                                <button class="btn btn-accent text-white">Edit </button>
+                                <button class="btn bg-blue-600 text-white"
+                                    @click="$dispatch('form-edit', { token: '{{ $device['token'] }}' })"
+                                    type="button">
+                                    Edit
+                                </button>
                                 <button class="btn btn-secondary text-white"
                                     @click="$dispatch('modal-delete-device', { token: '{{ $device['token'] }}' })"
                                     type="button">

@@ -14,14 +14,6 @@ class DevicesSendOtp extends Component
     public $token;
     public $otp;
 
-    #[On('form-edit')]
-    public function set_form(Permission $id)
-    {
-        $this->form->setForm($id);
-
-        $this->modalPermissionEdit = true;
-    }
-
     #[On('modal-delete-device')]
     public function modalDeleteDevice($token)
     {
