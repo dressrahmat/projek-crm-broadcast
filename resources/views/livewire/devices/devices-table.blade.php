@@ -39,8 +39,13 @@
                                 </p>
                             </td>
                             <td colspan="6" class="text-right">
-                                <button wire:click="connect('{{ $device['token'] }}', '{{ $device['device'] }}')"
-                                    class="btn btn-primary text-white">Connect</button>
+                                @if ($device['status'] == 'disconnect')
+                                    <button wire:click="connect('{{ $device['token'] }}', '{{ $device['device'] }}')"
+                                        class="btn btn-primary text-white">Connect</button>
+                                @else
+                                    <button wire:click="disconnect('{{ $device['token'] }}')"
+                                        class="btn btn-secondary text-white">Disconnect</button>
+                                @endif
                                 <button class="btn btn-neutral text-white">Token</button>
                                 <button class="btn btn-accent text-white">Edit </button>
                                 <button

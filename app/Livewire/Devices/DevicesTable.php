@@ -82,7 +82,6 @@ class DevicesTable extends Component
             // Decode respons JSON
             $response_data = json_decode($response, true);
 
-            
             if ($response_data['status'] === false) {
                 $this->dispatch('sweet-alert', icon: 'error', title: $response_data['reason']);
                 // dd('error');
@@ -93,6 +92,42 @@ class DevicesTable extends Component
                 $this->url = $response_data['url'] ?? null;
 
                 $this->dispatch('modal-otp-fonnte', icon: 'success', title: $this->code, text: $this->consent);
+            }
+        } catch (\Throwable $th) {
+            // $this->dispatch('sweet-alert', ['icon' => 'error', 'title' => 'Data gagal dihubungkan', 'text' => $th->getMessage()]);
+        }
+    }
+
+    public function disconnect($token)
+    {
+        try {
+            // Inisialisasi cURL
+            $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => 'https://api.fonnte.com/disconnect',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_HTTPHEADER => ['Authorization: '. $token],
+            ]);
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            // Decode respons JSON
+            $response_data = json_decode($response, true);
+
+            if ($response_data['status'] === false) {
+                $this->dispatch('sweet-alert', icon: 'error', title: $response_data['detail']);
+                // dd('error');
+            } else {
+                $this->dispatch('sweet-alert', icon: 'success', title: $response_data['detail']);
             }
         } catch (\Throwable $th) {
             // $this->dispatch('sweet-alert', ['icon' => 'error', 'title' => 'Data gagal dihubungkan', 'text' => $th->getMessage()]);
