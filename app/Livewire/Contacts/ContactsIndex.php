@@ -39,7 +39,6 @@ class ContactsIndex extends Component
         $this->dispatch('sweet-alert', icon: 'success', title: 'data label berhasil di ubah');
     }
     
-    #[On('adaPesan')]
     public function confirmDelete($get_id)
     {
         try {
