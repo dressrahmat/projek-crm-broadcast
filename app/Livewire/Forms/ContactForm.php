@@ -14,6 +14,9 @@ class ContactForm extends Form
     public $id;
 
     #[Rule('required|min:3', as: 'Name')]
+    public $id_user;
+
+    #[Rule('required|min:3', as: 'Name')]
     public $nama_lengkap;
 
     #[Rule('required|email', as: 'Email')]
@@ -45,6 +48,7 @@ class ContactForm extends Form
 
     public function store()
     {
+        $this->id_user = auth()->user()->id;
         Contact::create($this->except('contact'));
         $this->reset();
     }
