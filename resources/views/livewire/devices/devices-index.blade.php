@@ -6,5 +6,5 @@
         @livewire('devices.devices-create')
         @livewire('devices.devices-edit')
     </div> --}}
-
+    <x-modal-otp-fonnte />
 </div>

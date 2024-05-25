@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($data['data'] as $device)
+                    @forelse ($data['data'] as $id => $device)
                         <tr class="shadow-md mb-4">
                             <td colspan="3">
                                 <div>
@@ -39,10 +39,13 @@
                                 </p>
                             </td>
                             <td colspan="6" class="text-right">
-                                <button class="btn btn-primary text-white">Connect</button>
+                                <button wire:click="connect('{{ $device['token'] }}', '{{ $device['device'] }}')"
+                                    class="btn btn-primary text-white">Connect</button>
                                 <button class="btn btn-neutral text-white">Token</button>
-                                <button class="btn btn-accent text-white">Edit</button>
-                                <button class="btn btn-secondary text-white">Hapus</button>
+                                <button class="btn btn-accent text-white">Edit </button>
+                                <button
+                                    @click="$dispatch('confirm-delete', { id: '{{ $id }}', token: '{{ $device['token'] }}' })"
+                                    class="btn btn-secondary text-white">Hapus</button>
                             </td>
                             {{-- <td>{{ $device['name'] }}</td>
                             <td>{{ $device['package'] }}</td>
@@ -100,6 +103,6 @@
     </div>
     <x-sweet-alert />
     <div>
-        <x-confirm-delete />
+        <x-device-confirm-delete />
     </div>
 </div>
