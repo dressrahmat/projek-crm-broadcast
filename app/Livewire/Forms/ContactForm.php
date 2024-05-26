@@ -54,6 +54,7 @@ class ContactForm extends Form
 
     public function update()
     {
+        $this->id_user = auth()->user()->id;
         $this->contact->update($this->except('contact'));
     }
 }
