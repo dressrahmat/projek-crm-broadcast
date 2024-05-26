@@ -25,9 +25,9 @@
     <div class="hero min-h-screen bg-base-100">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <div class="text-center lg:text-left">
-                <h1 class="text-5xl font-bold">Simple Projek</h1>
-                <h2 class="text-2xl text-neutral font-bold mt-4">"Sistem Pelejit Potensi Ruang Objek"</h2>
-                <p class="py-6">Lejitkan potensi perusahaan dan instansi anda dengan sistem manajemen online. Rasakan pertumbuhan perusahaan dengan sistem yang dirancang khusus untuk perusahaan/instansi anda.</p>
+                <img src="{{ asset('../assets/images/website/logo-1.png') }}" alt="" class="w-5/6">
+                <h2 class="text-2xl text-neutral font-bold mt-4">"Kelola Daftar Kontak dengan Mudah"</h2>
+                <p class="py-6">Markcomm merupakan platform komunikasi yang inovatif, dirancang khusus untuk memudahkan pengguna dalam mengelompokkan dan mengelola kontak mereka untuk pesan broadcast. Dengan fitur-fitur yang disediakan, Markcomm memungkinkan pengguna untuk dengan mudah membuat daftar kontak yang spesifik dan mengirim pesan broadcast kepada mereka secara efisien.</p>
             </div>
             <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 text-base-content">
                 {{{ $slot }}}

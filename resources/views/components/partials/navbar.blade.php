@@ -4,9 +4,9 @@
         <!-- Navbar -->
         <div :class="{ 'w-4/5 lg:w-10/12 ': isOpen, 'w-10/12': !isOpen }"
             class="flex py-3 justify-between transition-all duration-500">
-            <p class="font-bold">Simple Projek
-                <span class="font-normal block">Jadikan sistem manajemen instansi anda menjadi lebih optimal dan efisien
-                    dengan Simple Projek</span>
+            <p class="font-bold">Kelola Daftar Kontak dengan Mudah:
+                <span class="font-normal block">Markcomm Memudahkan Anda dalam
+                    Mengelompokkan dan Mengelola Kontak untuk Pesan Broadcast</span>
             </p>
 
             <div class="dropdown dropdown-end">

@@ -3,8 +3,8 @@
 
     <!-- Logo -->
     <div class="flex items-center justify-between my-3">
-        <div :class="{ 'text-2xl': isOpen, 'hidden': !isOpen }" class=" w-1/2 text-base-100">
-            <p class="text-center">Simple Projek</p>
+        <div :class="{ 'text-2xl': isOpen, 'hidden': !isOpen }" class=" w-5/6 text-base-100 ml-3 p-2">
+            <img src="{{ asset('../assets/images/website/logo-1.png') }}" alt="logo-1" class="">
         </div>
         <button @click="isOpen = !isOpen" class="p-2 ml-4">
             <!-- Toggle -->
@@ -29,21 +29,21 @@
         <li>
             <a wire:navigate href="{{ route('label.index') }}"
                 class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('label.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-tag"></i>
                 <span class="ml-2" x-show="isOpen">Label Kontak</span>
             </a>
         </li>
         <li>
             <a wire:navigate href="{{ route('contacts.index') }}"
                 class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('contacts.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-phone-square"></i>
                 <span class="ml-2" x-show="isOpen">Kontak</span>
             </a>
         </li>
         <li>
             <a wire:navigate href="{{ route('devices.index') }}"
                 class="flex items-center px-4 py-4 my-1 {{ request()->routeIs('devices.index') ? 'glass rounded-md active bg-base-100 shadow-sm text-neutral' : ' text-base-100' }}">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-mobile-alt"></i>
                 <span class="ml-2" x-show="isOpen">Devices</span>
             </a>
         </li>
