@@ -15,6 +15,15 @@ class LabelKontaksCreate extends Component
     public LabelKontakForm $form;
 
     public $data_kontak;
+    public $search = '';
+    public $kontaks_non_labels = [];
+
+    public function mount()
+    {
+        $this->kontaks_non_labels = Contact::where('id_user', auth()->user()->id)
+            ->whereNull('id_label')
+            ->get();
+    }
     
     #[On('tambahLabel')]
     public function tangkapUbahLabel($data)
@@ -38,11 +47,26 @@ class LabelKontaksCreate extends Component
         $this->dispatch('form-create')->to(LabelKontaksTable::class);
     }
 
+    public function refreshSearch()
+    {
+    if ($this->search != '') {
+        $this->kontaks_non_labels = Contact::where('id_user', auth()->user()->id)
+            ->where(function ($query) {
+                $query->where('nama_lengkap', 'like', '%' . $this->search . '%')
+                    ->orWhere('nomor_telepon', 'like', '%' . $this->search . '%');
+            })
+            ->whereNull('id_label')
+            ->get();
+    } else {
+        $this->kontaks_non_labels = Contact::where('id_user', auth()->user()->id)
+            ->whereNull('id_label')
+            ->get();
+    }
+}
+
     #[On('form-edit')]
     public function render()
     {
-        $kontaks_non_labels = Contact::where('id_user', auth()->user()->id)->whereNull('id_label')->get();
-        // dd($kontaks_non_labels);
-        return view('livewire.label-kontaks.label-kontaks-create', compact('kontaks_non_labels'));
+        return view('livewire.label-kontaks.label-kontaks-create');
     }
 }

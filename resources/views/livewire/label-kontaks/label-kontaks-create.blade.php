@@ -19,6 +19,12 @@
                 </div>
 
                 <div class="overflow-x-auto">
+                    <div>
+                        <div>
+                            <input type="text" wire:model.debounce.50ms="search" wire:keyup="refreshSearch"
+                                class="border border-gray-300 px-3 py-1 mt-2 rounded-md" placeholder="Cari...">
+                        </div>
+                    </div>
                     <table class="table table-zebra">
                         <thead>
                             <tr>
