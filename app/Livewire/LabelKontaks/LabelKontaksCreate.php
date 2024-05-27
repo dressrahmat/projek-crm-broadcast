@@ -36,7 +36,6 @@ class LabelKontaksCreate extends Component
         }
 
         $this->dispatch('form-create')->to(LabelKontaksTable::class);
-        $this->dispatch('refreshDatatable')->to(KontaksNonLabelTable::class);
     }
 
     public function render()

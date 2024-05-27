@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             
             $table->unsignedBigInteger('id_label')->nullable();
-            $table->foreign('id_label')->references('id')->on('label_kontak')->onDelete('cascade');
+            $table->foreign('id_label')->references('id')->on('label_kontak')->onDelete('restrict');
             
             $table->string('nama_lengkap');
             $table->string('email')->unique()->nullable();

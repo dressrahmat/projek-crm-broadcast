@@ -165,7 +165,7 @@ class ContactsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id')->searchable()->sortable(), 
+            Column::make('Id', 'id')->hideIf(request()->routeIs('contacts.index')), 
             Column::make('Nama lengkap', 'nama_lengkap')->searchable()->sortable(), 
             Column::make('Nomor telepon', 'nomor_telepon')->searchable()->sortable(), 
             Column::make('Label', 'labelkontak.nama_label')->searchable()->sortable(), 

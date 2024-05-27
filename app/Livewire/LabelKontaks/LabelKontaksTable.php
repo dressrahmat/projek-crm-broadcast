@@ -11,18 +11,10 @@ class LabelKontaksTable extends Component
 {
     use WithPagination;
 
-    public function confirmDelete($get_id)
-    {
-        try {
-            LabelKontak::destroy($get_id);
-        } catch (\Throwable $th) {
-            $this->dispatch('sweet-alert', icon: 'error', title: 'data gagal di hapus');
-        }
-    }
-
     #[On('form-create')]
     #[On('form-edit')]
     #[On('form-delete')]
+    #[On('delete-success')]
     public function render()
     {
         $data = LabelKontak::latest()->paginate(5);

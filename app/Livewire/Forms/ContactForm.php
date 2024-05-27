@@ -30,7 +30,7 @@ class ContactForm extends Form
     #[Rule('required|min:3', as: 'Alamat')]
     public $alamat;
 
-    #[Rule('required', as: 'Label Kontak')]
+    #[Rule('nullable', as: 'Label Kontak')]
     public $id_label;
 
     public function setForm(Contact $contact)
