@@ -44,13 +44,14 @@
                                             <i class="fas fa-edit text-base"></i>
                                         </x-button>
                                     </li>
-
-                                    <li class="my-1">
-                                        <x-danger-button
-                                            @click="$dispatch('confirm-delete', { get_id: '{{ $label->id }}' })">
-                                            <i class="fas fa-trash-alt text-base"></i>
-                                        </x-danger-button>
-                                    </li>
+                                    @if ($label->kontak->where('id_user', auth()->user()->id)->count() == 0)
+                                        <li class="my-1">
+                                            <x-danger-button
+                                                @click="$dispatch('confirm-delete', { get_id: '{{ $label->id }}' })">
+                                                <i class="fas fa-trash-alt text-base"></i>
+                                            </x-danger-button>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                             </a>
