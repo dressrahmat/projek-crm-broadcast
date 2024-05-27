@@ -38,6 +38,7 @@ class LabelKontaksCreate extends Component
         $this->dispatch('form-create')->to(LabelKontaksTable::class);
     }
 
+    #[On('form-edit')]
     public function render()
     {
         $kontaks_non_labels = Contact::where('id_user', auth()->user()->id)->whereNull('id_label')->get();

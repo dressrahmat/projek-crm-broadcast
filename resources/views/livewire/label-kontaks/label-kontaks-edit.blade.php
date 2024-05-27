@@ -16,6 +16,45 @@
                     <x-input-error for="form.nama_label" class="mt-1" />
                 </div>
 
+                <div class="overflow-x-auto col-span-12">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Pilih
+                                </th>
+                                <th>
+                                    Nama Lengkap
+                                </th>
+                                <th>
+                                    Nomor Telepon
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kontaks_non_labels as $kontak_non_label)
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="kontak_{{ $kontak_non_label->id }}"
+                                            wire:model="form.kontaks" value="{{ $kontak_non_label->id }}"
+                                            class="checkbox checkbox-primary" />
+                                    </td>
+                                    <td>
+                                        <label for="kontak_{{ $kontak_non_label->id }}" class="cursor-pointer label">
+                                            <span class="label-text">{{ $kontak_non_label->nama_lengkap }}</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label for="kontak_{{ $kontak_non_label->id }}" class="cursor-pointer label">
+                                            <span class="label-text">{{ $kontak_non_label->nomor_telepon }}</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
 
             </div>
         </x-slot>

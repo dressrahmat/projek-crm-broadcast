@@ -29,4 +29,14 @@ class Contact extends Model
     {
         return $this->belongsTo(LabelKontak::class, 'id_label', 'id');
     }
+
+    /**
+     * Get the user that owns the Contact
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }

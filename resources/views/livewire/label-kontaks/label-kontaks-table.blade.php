@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $data->firstItem() + $loop->index }}</td>
                         <td>{{ $label->nama_label }}</td>
-                        <td>{{ $label->kontak->count() }}</td>
+                        <td>{{ $label->kontak->where('id_user', auth()->user()->id)->count() }}</td>
                         <td>
                             <!-- Dropdown -->
                             <div class="dropdown">
