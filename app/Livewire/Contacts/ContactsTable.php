@@ -19,7 +19,7 @@ class ContactsTable extends DataTableComponent
     public string $tableName = 'contact';
     public array $contact = [];
 
-    public $pesan = 'pesan default';
+    public $pesan = 'Assalaamu’alaikum Warahmatullahi Wabarakatuh';
     public function bulkActions(): array
     {
         return [
